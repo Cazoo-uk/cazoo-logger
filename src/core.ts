@@ -63,7 +63,7 @@ export function child<T extends Logger>(logger: T, context: Context): T {
   const instance = logger.instance.child(merged);
   return {
     ...logger,
-    context,
+    context: merged,
     instance,
   };
 }
