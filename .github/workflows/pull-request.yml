@@ -1,5 +1,9 @@
 name: Check
 on: [pull_request]
+
+permissions:
+    contents: read       # Required for actions/checkout
+
 jobs:
   check:
     runs-on: ubuntu-latest
