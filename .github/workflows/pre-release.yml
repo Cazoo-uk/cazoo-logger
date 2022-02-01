@@ -15,4 +15,4 @@ jobs:
               uses: esamattis/npm-release@v1
               with:
                   type: prerelease
-                  token: ${{ secrets.NPM_TOKEN }}
+                  token: ${{ secrets.CAZOO_NPM_TOKEN }}
