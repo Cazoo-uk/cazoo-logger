@@ -2,7 +2,7 @@ import * as logger from '../src';
 import {once, sink} from './helper';
 import * as sns from './data/sns';
 
-describe('When setting context', async () => {
+describe('When setting context', () => {
   it('Should include context in output', async () => {
     const stream = sink();
 
@@ -30,7 +30,7 @@ describe('When setting context', async () => {
   });
 });
 
-describe('When setting context twice', async () => {
+describe('When setting context twice', () => {
   it('Should extend existing context', async () => {
     const stream = sink();
 
