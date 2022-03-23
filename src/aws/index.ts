@@ -8,6 +8,7 @@ import {forDynamo} from './dynamodb';
 import {LambdaContext} from './context';
 import {forEventBridge, EventBridgeContext} from './eventbridge';
 import {AnyEvent} from './anyEvent';
+import {forInvocationRecord} from './invocationRecord';
 
 const UNKNOWN = 'unknown';
 
@@ -31,6 +32,7 @@ function fromContext(event: AnyEvent, ctx: Context, options = {}) {
     forCloudFront(event, ctx, options) ||
     forDynamo(event, ctx, options) ||
     forSqs(event, ctx, options) ||
+    forInvocationRecord(event, ctx, options) ||
     empty();
   return PinoLogger(options, context);
 }
