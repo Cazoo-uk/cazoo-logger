@@ -25,8 +25,8 @@ it('When logging in an API Gateway V2 event context', () => {
         method: event.requestContext.http.method,
         stage: event.requestContext.stage,
         query: {
-          parameter1: 'value1,value2',
-          parameter2: 'value',
+          parameter1: ['value1', 'value2'],
+          parameter2: ['value'],
         },
         routeKey: event.routeKey,
       },
