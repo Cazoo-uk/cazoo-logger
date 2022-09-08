@@ -1,5 +1,6 @@
 import {
   APIGatewayProxyEvent,
+  APIGatewayProxyEventV2,
   CloudFrontEvent,
   CloudFrontRequest,
   CloudFrontRequestEvent,
@@ -58,6 +59,7 @@ export type InvocationRecord<Response, Request = unknown> =
 export type AnyEvent =
   | SNSEvent
   | APIGatewayProxyEvent
+  | APIGatewayProxyEventV2
   | CloudFrontRequestEvent
   | EventBridgeEvent<string, unknown>
   | DynamoDBStreamEvent

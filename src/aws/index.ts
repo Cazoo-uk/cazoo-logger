@@ -3,6 +3,7 @@ import {Logger, LoggerOptions, PinoLogger, LogExtension} from '../core';
 import {forSns} from './sns';
 import {forSqs} from './sqs';
 import {forApiGateway} from './apiGateway';
+import {forApiGatewayV2} from './apiGatewayV2';
 import {forCloudFront} from './cloudfront';
 import {forDynamo} from './dynamodb';
 import {LambdaContext} from './context';
@@ -27,6 +28,7 @@ const empty = () => ({
 function fromContext(event: AnyEvent, ctx: Context, options = {}) {
   const context =
     forApiGateway(event, ctx, options) ||
+    forApiGatewayV2(event, ctx, options) ||
     forEventBridge(event, ctx, options) ||
     forSns(event, ctx, options) ||
     forCloudFront(event, ctx, options) ||

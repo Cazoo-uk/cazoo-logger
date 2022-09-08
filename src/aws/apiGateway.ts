@@ -4,7 +4,11 @@ import {LoggerOptions} from '../core';
 import {AnyEvent} from './anyEvent';
 
 function isApiGatewayEvent(event: AnyEvent): event is APIGatewayProxyEvent {
-  return 'requestContext' in event && 'stageVariables' in event;
+  return (
+    'requestContext' in event &&
+    'stageVariables' in event &&
+    'httpMethod' in event
+  );
 }
 
 export function forApiGateway(
