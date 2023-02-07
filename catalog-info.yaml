@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: cazoo-logger
+  description: A structured logger for NodeJS
+spec:
+  type: library
+  lifecycle: production
+  owner: group:principals
