@@ -21,7 +21,7 @@ $ yarn add @cazoo/logger
 Example lambda event handler using logger:
 
 ```typescript
-import * as Logger from "cazoo-logger";
+import * as Logger from "@cazoo/logger";
 import { Context, Handler, ScheduledEvent } from "aws-lambda";
 
 export const onEvent: Handler<ScheduledEvent, void> = async (event, context) => {
@@ -35,4 +35,50 @@ export const onEvent: Handler<ScheduledEvent, void> = async (event, context) => 
     throw error;
   }
 };
+```
+
+### Setting the log level
+
+The available log levels are:
+- debug
+- info
+- warn
+- error
+
+As a constructor argument:
+
+```typescript
+const loggerOptions = { level: 'info' }
+const logger = Logger.fromContext(event, context, );
+```
+
+As an environment variable with Terraform:
+
+```hcl
+resource "aws_lambda_function" "example_lambda" {
+  filename      = "lambda_function_payload.zip"
+  function_name = "lambda_function_name"
+  role          = aws_iam_role.for_lambda.arn
+  handler       = "index.handler"
+  runtime       = "nodejs16.x"
+
+  environment {
+    variables = {
+      CAZOO_LOGGER_LEVEL = "info"
+    }
+  }
+}
+```
+
+As an environment variable with Serverless:
+
+```yaml	
+service: example
+provider: aws
+ 
+functions:
+  hello:
+    handler: index.handler
+    environment:
+      CAZOO_LOGGER_LEVEL: "info"
 ```
