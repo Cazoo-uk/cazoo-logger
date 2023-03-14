@@ -37,6 +37,16 @@ export const onEvent: Handler<ScheduledEvent, void> = async (event, context) => 
 };
 ```
 
+For logging an error with level `warn`:
+
+```typescript
+try {
+  // TODO...
+} catch (error) {
+  logger.recordErrorAsWarning(error, "Lambda errored, but it's OK");
+}
+```
+
 ### Setting the log level
 
 The available log levels are:
