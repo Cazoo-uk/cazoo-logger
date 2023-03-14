@@ -7,13 +7,13 @@ A structured logger for NodeJS based on [pino](https://github.com/pinojs/pino).
 Using NPM:
 
 ```
-$ npm install pino
+$ npm install @cazoo/logger
 ```
 
 Using YARN:
 
 ```
-$ yarn add pino
+$ yarn add @cazoo/logger
 ```
 
 ## Usage
