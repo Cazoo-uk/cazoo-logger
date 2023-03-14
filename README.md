@@ -59,7 +59,7 @@ As a constructor argument:
 
 ```typescript
 const loggerOptions = { level: 'info' }
-const logger = Logger.fromContext(event, context, );
+const logger = Logger.fromContext(event, context, loggerOptions);
 ```
 
 As an environment variable with Terraform:
