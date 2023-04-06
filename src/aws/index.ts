@@ -45,7 +45,7 @@ export function contextFactory<
 >(
   transform: LogExtension<Logger<LambdaContext>, S, LambdaContext, SContext>
 ): (event: AnyEvent, ctx: Context, options: Partial<LoggerOptions>) => S {
-  return (event: AnyEvent, ctx: Context, options = {}) => {
+  return (event: AnyEvent, ctx: Context, options) => {
     return transform(fromContext(event, ctx, options));
   };
 }
