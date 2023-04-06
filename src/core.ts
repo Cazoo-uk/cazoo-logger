@@ -1,4 +1,4 @@
-import SonicBoom from "sonic-boom";
+import SonicBoom from 'sonic-boom';
 import Pino from 'pino';
 import {merge} from 'merge-anything';
 
