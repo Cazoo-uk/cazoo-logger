@@ -1,5 +1,5 @@
-import SonicBoom = require('sonic-boom');
-import Pino = require('pino');
+import SonicBoom from 'sonic-boom';
+import Pino from 'pino';
 import {merge} from 'merge-anything';
 
 // Type defs
@@ -42,7 +42,7 @@ export type LogExtension<
 
 // Impl
 
-function makeLog(level: string) {
+function makeLog(level: Level) {
   return function log(
     this: Logger,
     obj: Record<string, unknown> | string,

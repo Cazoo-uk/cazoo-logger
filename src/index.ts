@@ -1,5 +1,5 @@
 import {Context} from 'aws-lambda';
-import {Level, PinoLogger, Logger, LoggerOptions} from './core';
+import {PinoLogger, Logger, LoggerOptions} from './core';
 import {addFluentContext, FluentContext} from './fluentContext';
 import {useEventRecorder, EventRecorder} from './eventRecorder';
 import {addTimeout, TimeoutLogger} from './timeout';
@@ -8,27 +8,27 @@ import {useHttpRecorder, HttpRecorder} from './httpRequest';
 
 import {AnyEvent, contextFactory, LambdaContext} from './aws';
 
-export type CazooLogger = Logger &
-  TimeoutLogger &
-  FluentContext &
-  EventRecorder &
-  HttpRecorder &
-  ErrorRecorder;
+export type CazooLogger = Logger & FluentContext & ErrorRecorder;
 
-function logger(base: Logger<LambdaContext>): CazooLogger {
+export type CazooEventLogger = CazooLogger &
+  TimeoutLogger &
+  EventRecorder &
+  HttpRecorder;
+
+function logger(base: Logger<LambdaContext>): CazooEventLogger {
   return useHttpRecorder(
     useErrorRecorder(useEventRecorder(addTimeout(addFluentContext(base))))
   );
 }
 
-export function empty(options = {}): Logger & FluentContext & ErrorRecorder {
+export function empty(options = {}): CazooLogger {
   return useErrorRecorder(addFluentContext(PinoLogger(options, {})));
 }
 
 export const fromContext = (
   e: AnyEvent,
   c: Context,
-  o: Partial<LoggerOptions>
+  o: Partial<LoggerOptions> = {}
 ) => {
   const log = contextFactory(logger)(e, c, o);
   log.setTimeout(c);
