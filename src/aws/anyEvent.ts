@@ -7,6 +7,8 @@ import {
   DynamoDBRecord,
   DynamoDBStreamEvent,
   EventBridgeEvent,
+  S3Event,
+  S3EventRecord,
   SNSEvent,
   SNSEventRecord,
   SQSEvent,
@@ -65,7 +67,9 @@ export type AnyEvent =
   | DynamoDBStreamEvent
   | SQSEvent
   | SQSRecord
-  | InvocationRecord<unknown>;
+  | InvocationRecord<unknown>
+  | S3Event
+  | S3EventRecord;
 
 type CloudfrontRecord = {
   cf: CloudFrontEvent & {
