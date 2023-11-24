@@ -10,9 +10,22 @@ jobs:
     prerelease:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
             - name: Make stable release to npm
               uses: esamattis/npm-release@v2
               with:
                   type: stable
                   token: ${{ secrets.CAZOO_NPM_TOKEN }}
+
+    alert-on-failure:
+        needs: [prerelease]
+        if: ${{ always() && contains(needs.*.result, 'failure') }}
+        runs-on: ubuntu-latest
+        name: Alert On Failure
+        steps:
+            - uses: Cazoo-uk/action-opsgenie-alert@v1
+              with:
+                  api_key: ${{ secrets.TEAM_OPSGENIE_API_KEY }}
+                  alias: ${{ github.repository }}-${{ github.workflow }}
+                  message: ${{ github.workflow }} ${{ github.action_status }} in ${{ github.repository }}
+                  description: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
